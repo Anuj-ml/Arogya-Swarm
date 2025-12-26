@@ -29,9 +29,18 @@ app.add_middleware(
 app.add_exception_handler(Exception, global_exception_handler)
 
 # Import and register routers
-from api.v1 import patients
+from api.v1 import patients, diagnosis, nutrition
+from agents.orchestrator import orchestrator, AgentType
+from agents.diagnostic_triage_agent import diagnostic_triage_agent
+from agents.nutrition_agent import nutrition_agent as nutrition_agent_instance
+
+# Register agents with orchestrator
+orchestrator.register_agent(AgentType.TRIAGE, diagnostic_triage_agent)
+orchestrator.register_agent(AgentType.NUTRITION, nutrition_agent_instance)
 
 app.include_router(patients.router, prefix="/api/v1/patients", tags=["patients"])
+app.include_router(diagnosis.router, prefix="/api/v1/diagnosis", tags=["diagnosis"])
+app.include_router(nutrition.router, prefix="/api/v1/nutrition", tags=["nutrition"])
 
 
 @app.get("/")
