@@ -96,7 +96,7 @@ class AgentOrchestrator:
             })
             results['triage'] = triage_result
         
-        # Step 2: If high severity, alert communication agent
+        # Step 2: If high severity, alert communication agent (if registered)
         if results.get('triage', {}).get('severity') in ['high', 'critical']:
             if AgentType.COMMUNICATION in self.agents:
                 comm_agent = self.agents[AgentType.COMMUNICATION]
@@ -108,6 +108,12 @@ class AgentOrchestrator:
                     'agent': 'communication',
                     'action': 'send_alert',
                     'result': alert_result
+                })
+            else:
+                results['steps'].append({
+                    'agent': 'communication',
+                    'action': 'send_alert',
+                    'result': {'status': 'skipped', 'reason': 'agent_not_registered'}
                 })
         
         return results
