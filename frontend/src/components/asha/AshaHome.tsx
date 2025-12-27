@@ -68,7 +68,7 @@ export default function AshaHome() {
           {/* Quick Actions Grid */}
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {/* Register New Patient */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <Link to="/asha/register" className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group block">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <User className="w-6 h-6 text-primary-600" />
@@ -85,10 +85,10 @@ export default function AshaHome() {
                 <Volume2 className="w-4 h-4" />
                 <span>Voice enabled</span>
               </div>
-            </button>
+            </Link>
 
             {/* Symptom Checker */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <Link to="/asha/symptoms" className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group block">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Stethoscope className="w-6 h-6 text-blue-600" />
@@ -105,7 +105,7 @@ export default function AshaHome() {
                 <Volume2 className="w-4 h-4" />
                 <span>AI Assistant</span>
               </div>
-            </button>
+            </Link>
 
             {/* Capture Medical Image */}
             <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
