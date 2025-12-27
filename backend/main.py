@@ -29,7 +29,7 @@ app.add_middleware(
 app.add_exception_handler(Exception, global_exception_handler)
 
 # Import and register routers
-from api.v1 import patients, diagnosis, nutrition, surge, inventory, telemedicine, images, messaging, asha
+from api.v1 import patients, diagnosis, nutrition, surge, inventory, telemedicine, images, messaging, asha, prescriptions, analytics, staff
 from agents.orchestrator import orchestrator, AgentType
 from agents.diagnostic_triage_agent import diagnostic_triage_agent
 from agents.nutrition_agent import nutrition_agent as nutrition_agent_instance
@@ -55,6 +55,9 @@ app.include_router(telemedicine.router)  # prefix already defined
 app.include_router(images.router)  # prefix already defined
 app.include_router(messaging.router)  # prefix already defined
 app.include_router(asha.router)  # prefix already defined
+app.include_router(prescriptions.router)  # prefix already defined
+app.include_router(analytics.router)  # prefix already defined
+app.include_router(staff.router)  # prefix already defined
 
 
 @app.get("/")
