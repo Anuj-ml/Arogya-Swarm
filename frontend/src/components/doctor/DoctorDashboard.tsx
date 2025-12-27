@@ -3,8 +3,8 @@
  * Shows patients sorted by severity with AI summaries
  */
 import { useState, useEffect } from 'react';
-import { Users, Clock, AlertCircle, ChevronRight, Video } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Users, Clock, AlertCircle, ChevronRight, FileText, History } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface Patient {
   id: number;
@@ -22,6 +22,7 @@ export default function DoctorDashboard() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadPatientQueue();
@@ -239,13 +240,29 @@ export default function DoctorDashboard() {
                     </p>
                   </div>
                   
-                  <Link
-                    to={`/doctor/patient/${patient.id}`}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                  >
-                    <span>View Case</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => navigate(`/doctor/history/${patient.id}`)}
+                      className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                    >
+                      <History className="w-4 h-4" />
+                      <span>History</span>
+                    </button>
+                    <button
+                      onClick={() => navigate(`/doctor/prescribe/${patient.id}`)}
+                      className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>Prescribe</span>
+                    </button>
+                    <Link
+                      to={`/doctor/patient/${patient.id}`}
+                      className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    >
+                      <span>View Case</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="mb-4">
