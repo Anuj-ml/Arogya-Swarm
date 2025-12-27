@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './components/landing/Landing';
 import AshaHome from './components/asha/AshaHome';
+import DoctorDashboard from './components/doctor/DoctorDashboard';
+import AdminHome from './components/admin/AdminHome';
+import VoicePatientRegistration from './components/asha/forms/VoicePatientRegistration';
+import SymptomChecker from './components/asha/forms/SymptomChecker';
 
 function App() {
   return (
@@ -8,8 +12,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/asha" element={<AshaHome />} />
-        <Route path="/doctor" element={<div className="p-8"><h1 className="text-2xl font-bold">Doctor Dashboard - Coming Soon</h1></div>} />
-        <Route path="/admin" element={<div className="p-8"><h1 className="text-2xl font-bold">Admin Interface - Coming Soon</h1></div>} />
+        <Route path="/asha/register" element={<VoicePatientRegistration />} />
+        <Route path="/asha/symptoms" element={<SymptomChecker />} />
+        <Route path="/doctor" element={<DoctorDashboard />} />
+        <Route path="/admin" element={<AdminHome />} />
       </Routes>
     </Router>
   );

@@ -157,6 +157,63 @@ class ApiClient {
       data,
     });
   }
+
+  async analyzeDiagnosis(data: any) {
+    return this.request({
+      method: 'POST',
+      url: '/api/v1/diagnosis/analyze',
+      data,
+    });
+  }
+
+  // Prescription APIs
+  async createPrescription(data: any) {
+    return this.request({
+      method: 'POST',
+      url: '/api/v1/prescriptions/',
+      data,
+    });
+  }
+
+  async getPrescriptions(filters?: any) {
+    return this.request({
+      method: 'GET',
+      url: '/api/v1/prescriptions/',
+      params: filters,
+    });
+  }
+
+  // Analytics APIs
+  async getDashboardAnalytics() {
+    return this.request({
+      method: 'GET',
+      url: '/api/v1/analytics/dashboard',
+    });
+  }
+
+  async getPatientAnalytics(days: number = 7) {
+    return this.request({
+      method: 'GET',
+      url: '/api/v1/analytics/patients',
+      params: { days },
+    });
+  }
+
+  // Staff APIs
+  async getStaff(filters?: any) {
+    return this.request({
+      method: 'GET',
+      url: '/api/v1/staff/',
+      params: filters,
+    });
+  }
+
+  async getStaffAvailability() {
+    return this.request({
+      method: 'GET',
+      url: '/api/v1/staff/availability/summary',
+    });
+  }
 }
 
 export const apiClient = new ApiClient();
