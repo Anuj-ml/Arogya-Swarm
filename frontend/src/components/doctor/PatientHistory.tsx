@@ -395,10 +395,10 @@ export default function PatientHistory({ patientId: propPatientId }: PatientHist
               <div>
                 <h4 className="font-semibold text-sm mb-2">Image:</h4>
                 <img
-                  src={event.metadata.imageUrl}
+                  src={event.metadata.imageUrl as string}
                   alt="Medical Image"
                   className="w-48 h-48 object-cover rounded-lg cursor-pointer hover:opacity-90"
-                  onClick={() => setSelectedImage(event.metadata.imageUrl)}
+                  onClick={() => setSelectedImage(event.metadata?.imageUrl as string)}
                 />
               </div>
             )}

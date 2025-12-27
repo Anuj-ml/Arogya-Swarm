@@ -240,7 +240,8 @@ export default function PrescriptionWriter({ patientId: propPatientId, onSuccess
         }
       }, 2000);
     } catch (err: unknown) {
-      setError((err as Error).message || 'Failed to save prescription');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to save prescription';
+      setError(errorMessage);
       console.error(err);
     } finally {
       setSaving(false);
