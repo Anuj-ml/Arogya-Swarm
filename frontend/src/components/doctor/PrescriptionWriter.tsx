@@ -127,6 +127,7 @@ export default function PrescriptionWriter({ patientId: propPatientId, onSuccess
 
   useEffect(() => {
     loadPatientInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId]);
 
   const loadPatientInfo = async () => {
@@ -238,8 +239,8 @@ export default function PrescriptionWriter({ patientId: propPatientId, onSuccess
           navigate('/doctor');
         }
       }, 2000);
-    } catch (err: any) {
-      setError(err.message || 'Failed to save prescription');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Failed to save prescription');
       console.error(err);
     } finally {
       setSaving(false);

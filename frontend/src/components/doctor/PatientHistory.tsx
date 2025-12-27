@@ -39,7 +39,7 @@ interface HistoryEvent {
   title: string;
   description: string;
   severity?: 'low' | 'medium' | 'high' | 'critical';
-  metadata?: any;
+  metadata?: Record<string, unknown>;
 }
 
 interface PatientHistoryProps {
@@ -62,10 +62,12 @@ export default function PatientHistory({ patientId: propPatientId }: PatientHist
 
   useEffect(() => {
     loadPatientData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId]);
 
   useEffect(() => {
     filterEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events, selectedFilter, searchQuery]);
 
   const loadPatientData = async () => {
@@ -349,7 +351,7 @@ export default function PatientHistory({ patientId: propPatientId }: PatientHist
                       </tr>
                     </thead>
                     <tbody>
-                      {event.metadata.medicines.map((med: any, idx: number) => (
+                      {event.metadata.medicines.map((med: { name: string; dosage: string; frequency: string; duration: string }, idx: number) => (
                         <tr key={idx} className="border-t">
                           <td className="py-2 px-3">{med.name}</td>
                           <td className="py-2 px-3">{med.dosage}</td>
@@ -475,7 +477,7 @@ export default function PatientHistory({ patientId: propPatientId }: PatientHist
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(event.metadata.mealBreakdown).map(([meal, cal]) => (
                     <div key={meal} className="bg-orange-50 p-2 rounded">
-                      <span className="font-medium capitalize">{meal}:</span> {cal as string}
+                      <span className="font-medium capitalize">{meal}:</span> {String(cal)}
                     </div>
                   ))}
                 </div>
