@@ -108,7 +108,7 @@ export default function AshaHome() {
             </Link>
 
             {/* Capture Medical Image */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <Link to="/asha/camera/1" className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group block">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Camera className="w-6 h-6 text-purple-600" />
@@ -119,12 +119,12 @@ export default function AshaHome() {
                 Capture Medical Image
               </h3>
               <p className="text-sm text-gray-600 mb-3">
-                Take photos of wounds, rashes, or conditions for doctor review
+                Take photos of wounds, rashes, or conditions for AI analysis
               </p>
               <div className="flex items-center space-x-2 text-xs text-purple-600">
                 <span>AI Analysis</span>
               </div>
-            </button>
+            </Link>
 
             {/* Patient History */}
             <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">

@@ -1,10 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import Landing from './components/landing/Landing';
 import AshaHome from './components/asha/AshaHome';
 import DoctorDashboard from './components/doctor/DoctorDashboard';
 import AdminHome from './components/admin/AdminHome';
 import VoicePatientRegistration from './components/asha/forms/VoicePatientRegistration';
 import SymptomChecker from './components/asha/forms/SymptomChecker';
+import CameraCapture from './components/asha/CameraCapture';
+import VideoCall from './components/doctor/VideoCall';
+
+// Wrapper components to extract route params
+function CameraCaptureWrapper() {
+  const { patientId } = useParams<{ patientId: string }>();
+  const navigate = useNavigate();
+  
+  return (
+    <CameraCapture 
+      patientId={parseInt(patientId || '0')} 
+      onCancel={() => navigate('/asha')}
+    />
+  );
+}
+
+function VideoCallWrapper() {
+  const { bookingId } = useParams<{ bookingId: string }>();
+  
+  return <VideoCall bookingId={parseInt(bookingId || '0')} />;
+}
 
 function App() {
   return (
@@ -14,7 +35,9 @@ function App() {
         <Route path="/asha" element={<AshaHome />} />
         <Route path="/asha/register" element={<VoicePatientRegistration />} />
         <Route path="/asha/symptoms" element={<SymptomChecker />} />
+        <Route path="/asha/camera/:patientId" element={<CameraCaptureWrapper />} />
         <Route path="/doctor" element={<DoctorDashboard />} />
+        <Route path="/doctor/video/:bookingId" element={<VideoCallWrapper />} />
         <Route path="/admin" element={<AdminHome />} />
       </Routes>
     </Router>

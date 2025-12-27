@@ -3,7 +3,7 @@
  * Shows patients sorted by severity with AI summaries
  */
 import { useState, useEffect } from 'react';
-import { Users, Clock, AlertCircle, ChevronRight } from 'lucide-react';
+import { Users, Clock, AlertCircle, ChevronRight, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Patient {
@@ -299,10 +299,10 @@ export default function DoctorDashboard() {
               <div className="text-green-600 font-medium">Today's Appointments</div>
             </Link>
             <Link
-              to="/doctor/video-calls"
+              to="/doctor/video/12345"
               className="p-4 border-2 border-purple-200 rounded-lg hover:bg-purple-50 transition text-center"
             >
-              <div className="text-purple-600 font-medium">Join Video Call</div>
+              <div className="text-purple-600 font-medium">Join Video Call (Demo)</div>
             </Link>
           </div>
         </div>
