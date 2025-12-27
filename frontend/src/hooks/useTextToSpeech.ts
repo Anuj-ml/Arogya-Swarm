@@ -167,5 +167,3 @@ export const useTextToSpeech = (
     setVoice,
   };
 };
-
-export default useTextToSpeech;

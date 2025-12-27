@@ -145,5 +145,3 @@ export const useSpeechRecognition = (
     error,
   };
 };
-
-export default useSpeechRecognition;
