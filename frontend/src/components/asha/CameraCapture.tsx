@@ -135,7 +135,14 @@ export default function CameraCapture({ patientId, onSuccess, onCancel }: Camera
       }
 
       // Upload to backend
-      const result: any = await apiClient.uploadImage(file, patientId, context);
+      const result = await apiClient.uploadImage(file, patientId, context) as {
+        analysis?: {
+          findings?: string[];
+          urgency?: 'low' | 'medium' | 'high' | 'critical';
+          recommendations?: string[];
+          confidence_score?: number;
+        };
+      };
 
       if (result.analysis) {
         const analysis: ImageAnalysis = {
@@ -161,9 +168,10 @@ export default function CameraCapture({ patientId, onSuccess, onCancel }: Camera
           onSuccess(analysis);
         }
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error('Upload error:', err);
-      setError(err.response?.data?.detail || 'Failed to upload image. Please try again.');
+      const error = err as { response?: { data?: { detail?: string } } };
+      setError(error.response?.data?.detail || 'Failed to upload image. Please try again.');
 
       // Save to IndexedDB on error
       await addMedicalImage({

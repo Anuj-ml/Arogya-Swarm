@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Video, Phone, Clock, User, AlertCircle, FileText, Loader } from 'lucide-react';
 import { JitsiMeeting } from '@jitsi/react-sdk';
+import type { IJitsiMeetExternalApi } from '@jitsi/react-sdk';
 import apiClient from '../../services/apiClient';
 
 interface Booking {
@@ -33,6 +34,7 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
 
   const navigate = useNavigate();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const jitsiApiRef = useRef<IJitsiMeetExternalApi | null>(null);
 
   useEffect(() => {
     loadBooking();
@@ -41,7 +43,12 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      // Clean up Jitsi event listener
+      if (jitsiApiRef.current) {
+        jitsiApiRef.current.removeEventListener('videoConferenceLeft');
+      }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingId]);
 
   useEffect(() => {
@@ -65,7 +72,9 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
       setError(null);
 
       // Fetch booking details
-      const response: any = await apiClient.getBookings();
+      const response = await apiClient.getBookings() as { 
+        bookings?: Booking[] 
+      };
       const bookings = response.bookings || [];
 
       // Find the specific booking
@@ -87,7 +96,9 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
 
       // Load case summary
       try {
-        const summaryResponse: any = await apiClient.getCaseSummary(bookingData.patient_id);
+        const summaryResponse = await apiClient.getCaseSummary(bookingData.patient_id) as {
+          summary?: string;
+        };
         setCaseSummary(summaryResponse.summary || 'No case summary available.');
       } catch (err) {
         console.error('Failed to load case summary:', err);
@@ -95,9 +106,10 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
       }
 
       setLoading(false);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error loading booking:', err);
-      setError(err.response?.data?.detail || 'Failed to load booking details.');
+      const error = err as { response?: { data?: { detail?: string } } };
+      setError(error.response?.data?.detail || 'Failed to load booking details.');
       setLoading(false);
     }
   };
@@ -229,6 +241,7 @@ export default function VideoCall({ bookingId }: VideoCallProps) {
             onApiReady={(externalApi) => {
               setCallStarted(true);
               console.log('Jitsi API ready');
+              jitsiApiRef.current = externalApi;
 
               // Listen for hangup event using addEventListener
               externalApi.addEventListener('videoConferenceLeft', () => {
