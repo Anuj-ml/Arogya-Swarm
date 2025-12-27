@@ -7,6 +7,8 @@ import VoicePatientRegistration from './components/asha/forms/VoicePatientRegist
 import SymptomChecker from './components/asha/forms/SymptomChecker';
 import CameraCapture from './components/asha/CameraCapture';
 import VideoCall from './components/doctor/VideoCall';
+import PrescriptionWriter from './components/doctor/PrescriptionWriter';
+import PatientHistory from './components/doctor/PatientHistory';
 
 // Wrapper components to extract route params
 function CameraCaptureWrapper() {
@@ -27,6 +29,18 @@ function VideoCallWrapper() {
   return <VideoCall bookingId={parseInt(bookingId || '0')} />;
 }
 
+function PrescriptionWriterWrapper() {
+  const { patientId } = useParams<{ patientId: string }>();
+  
+  return <PrescriptionWriter patientId={parseInt(patientId || '0')} />;
+}
+
+function PatientHistoryWrapper() {
+  const { patientId } = useParams<{ patientId: string }>();
+  
+  return <PatientHistory patientId={parseInt(patientId || '0')} />;
+}
+
 function App() {
   return (
     <Router>
@@ -38,6 +52,8 @@ function App() {
         <Route path="/asha/camera/:patientId" element={<CameraCaptureWrapper />} />
         <Route path="/doctor" element={<DoctorDashboard />} />
         <Route path="/doctor/video/:bookingId" element={<VideoCallWrapper />} />
+        <Route path="/doctor/prescribe/:patientId" element={<PrescriptionWriterWrapper />} />
+        <Route path="/doctor/history/:patientId" element={<PatientHistoryWrapper />} />
         <Route path="/admin" element={<AdminHome />} />
       </Routes>
     </Router>
