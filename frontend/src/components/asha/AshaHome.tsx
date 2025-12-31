@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Home, User, Stethoscope, Camera, Wifi, WifiOff, Mic, Volume2 } from 'lucide-react';
 
 export default function AshaHome() {
+  const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
@@ -68,7 +69,10 @@ export default function AshaHome() {
           {/* Quick Actions Grid */}
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {/* Register New Patient */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <button 
+              onClick={() => navigate('/asha/register')}
+              className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <User className="w-6 h-6 text-primary-600" />
@@ -88,7 +92,10 @@ export default function AshaHome() {
             </button>
 
             {/* Symptom Checker */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <button 
+              onClick={() => navigate('/asha/symptoms')}
+              className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Stethoscope className="w-6 h-6 text-blue-600" />
@@ -108,7 +115,10 @@ export default function AshaHome() {
             </button>
 
             {/* Capture Medical Image */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <button 
+              onClick={() => navigate('/asha/camera')}
+              className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Camera className="w-6 h-6 text-purple-600" />
@@ -127,7 +137,10 @@ export default function AshaHome() {
             </button>
 
             {/* Patient History */}
-            <button className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group">
+            <button 
+              onClick={() => navigate('/asha/patients')}
+              className="bg-white hover:bg-primary-50 transition-colors rounded-xl shadow-md p-6 text-left group"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                   <User className="w-6 h-6 text-orange-600" />
