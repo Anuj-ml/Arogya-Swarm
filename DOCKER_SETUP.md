@@ -278,14 +278,32 @@ Both backend and frontend support hot reload:
 
 ## Production Deployment
 
-For production deployment:
+⚠️ **IMPORTANT SECURITY NOTES**
 
-1. Change `ENVIRONMENT` to `production` in `docker-compose.yml`
-2. Use secure passwords and change the default database credentials
-3. Set up SSL/TLS certificates
-4. Use environment-specific configuration files
-5. Enable proper logging and monitoring
-6. Consider using Docker Swarm or Kubernetes for orchestration
+The default configuration uses development credentials that are NOT secure for production:
+- Database password: `password` (weak)
+- All demo users have the same password: `password123`
+
+**Before deploying to production:**
+
+1. Change database credentials in `docker-compose.yml`:
+   - Use strong, unique passwords
+   - Consider using Docker secrets or environment variables
+   - Never commit production credentials to version control
+
+2. Update the `seed_data.sql` or remove it entirely:
+   - Generate unique, strong passwords for each user
+   - Use proper bcrypt hashing with appropriate work factor
+   - Remove or disable demo accounts
+
+3. Additional production requirements:
+   - Set up SSL/TLS certificates
+   - Configure proper CORS origins
+   - Enable rate limiting and authentication
+   - Set up proper logging and monitoring
+   - Use environment-specific configuration files
+   - Consider using Docker Swarm or Kubernetes for orchestration
+   - Implement proper backup and disaster recovery procedures
 
 ## Additional Resources
 

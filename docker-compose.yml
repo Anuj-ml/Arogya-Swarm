@@ -3,6 +3,8 @@ services:
     image: postgres:15-alpine
     container_name: arogya-db
     environment:
+      # WARNING: These are development credentials only!
+      # For production, use strong passwords and consider using Docker secrets
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: arogya

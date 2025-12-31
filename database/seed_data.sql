@@ -7,8 +7,9 @@ VALUES
 ON CONFLICT (id) DO NOTHING;
 
 -- Insert sample users with hashed passwords
--- Note: These are bcrypt hashes of 'password123' for demonstration
--- In production, use proper password hashing
+-- NOTE: These are demo credentials for development ONLY!
+-- All passwords are 'password123' - bcrypt hash: $2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYzpLaEmaUu
+-- In production, always use unique, strong passwords with proper hashing!
 INSERT INTO users (id, username, email, password_hash, role, full_name, phone, is_active, created_at, updated_at)
 VALUES
     ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'asha_worker', 'asha@arogya.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYzpLaEmaUu', 'asha_worker', 'Priya Sharma', '+919876543220', true, NOW(), NOW()),
