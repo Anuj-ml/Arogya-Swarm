@@ -50,14 +50,15 @@ export default function DoctorDashboard() {
     try {
       // Load patient queue
       const patientsData = await apiClient.getPatients();
-      setPatients((patientsData as Patient[]).slice(0, 10)); // Show first 10
+      setPatients((patientsData as Patient[]).slice(0, 10)); // Show first 10 (TODO: Add pagination to API)
 
       // Calculate stats from data
+      // TODO: Replace with real API endpoints for these statistics
       setStats({
         total_patients: (patientsData as Patient[]).length,
-        pending_cases: Math.floor((patientsData as Patient[]).length * 0.3), // Mock pending
-        critical_cases: Math.floor((patientsData as Patient[]).length * 0.1), // Mock critical
-        avg_wait_time: '15 min',
+        pending_cases: Math.floor((patientsData as Patient[]).length * 0.3), // Mock: 30% pending
+        critical_cases: Math.floor((patientsData as Patient[]).length * 0.1), // Mock: 10% critical
+        avg_wait_time: '15 min', // Mock value
       });
     } catch (error) {
       console.error('Error loading dashboard data:', error);

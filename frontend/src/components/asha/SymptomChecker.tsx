@@ -61,12 +61,15 @@ export default function SymptomChecker() {
     setError(null);
 
     try {
-      const response = await apiClient.analyzeSymptoms({
-        symptoms: selectedSymptoms.join(', ') + (additionalInfo ? `. ${additionalInfo}` : ''),
+      // Structure symptoms data properly for backend
+      const symptomsData = {
+        symptoms: selectedSymptoms.join(', '),
         duration,
         severity,
-      });
+        additional_info: additionalInfo,
+      };
       
+      const response = await apiClient.analyzeSymptoms(symptomsData);
       setResult(response as DiagnosisResult);
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Failed to analyze symptoms');

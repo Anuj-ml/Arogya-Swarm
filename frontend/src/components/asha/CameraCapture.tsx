@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Camera, Upload, Image as ImageIcon, Send } from 'lucide-react';
 import apiClient from '../../services/apiClient';
 
+const DEFAULT_CONTEXT = 'Medical condition assessment';
+
 export default function CameraCapture() {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -36,7 +38,7 @@ export default function CameraCapture() {
     setError(null);
 
     try {
-      const response = await apiClient.uploadImage(selectedFile, undefined, 'Medical condition assessment');
+      const response = await apiClient.uploadImage(selectedFile, undefined, DEFAULT_CONTEXT);
       setResult(response);
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Failed to analyze image');
