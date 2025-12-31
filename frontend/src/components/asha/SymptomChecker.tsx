@@ -7,12 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, AlertTriangle, CheckCircle2, Mic, Send } from 'lucide-react';
 import apiClient from '../../services/apiClient';
 
-interface SymptomData {
-  symptoms: string[];
-  duration: string;
-  severity: string;
-}
-
 interface DiagnosisResult {
   severity: string;
   risk_score: number;

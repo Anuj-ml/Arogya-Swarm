@@ -2,7 +2,7 @@
  * Admin Home Dashboard
  * Central dashboard for administrators with surge alerts and inventory status
  */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AlertTriangle, Package, Activity, Users } from 'lucide-react';
 import apiClient from '../../services/apiClient';
 
@@ -33,11 +33,11 @@ export default function AdminHome() {
     try {
       // Load surge status
       const surge = await apiClient.getSurgeStatus('default');
-      setSurgeStatus(surge);
+      setSurgeStatus(surge as SurgeStatus);
 
       // Load inventory summary
       const inv = await apiClient.getInventorySummary();
-      setInventory(inv);
+      setInventory(inv as InventorySummary);
     } catch (error) {
       console.error('Error loading dashboard data:', error);
     } finally {
