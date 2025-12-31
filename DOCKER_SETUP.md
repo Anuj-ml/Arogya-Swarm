@@ -246,6 +246,31 @@ docker-compose down -v
 docker-compose up -d
 ```
 
+### Running Database Migrations
+
+If you have an existing database and need to apply schema updates:
+
+#### For the latest migration (add missing columns):
+```bash
+# Run the migration script
+docker exec -it arogya-db psql -U postgres -d arogya -f /docker-entrypoint-initdb.d/migrations/add_missing_columns.sql
+```
+
+Or from your host machine:
+```bash
+psql -h localhost -U postgres -d arogya -f database/migrations/add_missing_columns.sql
+```
+
+#### Verify migration applied successfully:
+```bash
+# Check if new columns exist
+docker exec -it arogya-db psql -U postgres -d arogya -c "\d patients"
+```
+
+You should see columns: `district`, `state`, `asha_worker_id`, and `language_preference`.
+
+For more information about database schema and migrations, see [database/README.md](database/README.md).
+
 ## Development Workflow
 
 ### Hot Reload
