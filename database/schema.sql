@@ -9,6 +9,10 @@ CREATE TABLE IF NOT EXISTS patients (
     gender VARCHAR(10) CHECK (gender IN ('male', 'female', 'other')),
     phone VARCHAR(15) UNIQUE,
     village VARCHAR(100),
+    district VARCHAR(100),
+    state VARCHAR(50) DEFAULT 'Maharashtra',
+    asha_worker_id UUID,
+    language_preference VARCHAR(5) DEFAULT 'en',
     address TEXT,
     medical_history JSONB DEFAULT '{}',
     created_at TIMESTAMP DEFAULT NOW(),
@@ -71,6 +75,9 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create indexes for performance
 CREATE INDEX IF NOT EXISTS idx_patients_phone ON patients(phone);
 CREATE INDEX IF NOT EXISTS idx_patients_village ON patients(village);
+CREATE INDEX IF NOT EXISTS idx_patients_district ON patients(district);
+CREATE INDEX IF NOT EXISTS idx_patients_state ON patients(state);
+CREATE INDEX IF NOT EXISTS idx_patients_asha_worker ON patients(asha_worker_id);
 CREATE INDEX IF NOT EXISTS idx_health_records_patient_id ON health_records(patient_id);
 CREATE INDEX IF NOT EXISTS idx_health_records_created_at ON health_records(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_prescriptions_patient_id ON prescriptions(patient_id);

@@ -1,9 +1,9 @@
 -- Insert sample patients
-INSERT INTO patients (id, name, age, gender, phone, village, address, medical_history, created_at, updated_at)
+INSERT INTO patients (id, name, age, gender, phone, village, district, state, asha_worker_id, language_preference, address, medical_history, created_at, updated_at)
 VALUES
-    ('11111111-1111-1111-1111-111111111111', 'Ramesh Kumar', 45, 'male', '+919876543210', 'Dharavi', 'House No. 123, Dharavi, Mumbai', '{"allergies": ["penicillin"], "chronic_conditions": ["diabetes"]}', NOW(), NOW()),
-    ('22222222-2222-2222-2222-222222222222', 'Sunita Devi', 32, 'female', '+919876543211', 'Kurla', 'Plot No. 456, Kurla Village, Mumbai', '{"allergies": [], "chronic_conditions": ["hypertension"]}', NOW(), NOW()),
-    ('33333333-3333-3333-3333-333333333333', 'Arjun Singh', 28, 'male', '+919876543212', 'Andheri', 'Block B, Andheri East, Mumbai', '{"allergies": [], "chronic_conditions": []}', NOW(), NOW())
+    ('11111111-1111-1111-1111-111111111111', 'Ramesh Kumar', 45, 'male', '+919876543210', 'Dharavi', 'Mumbai', 'Maharashtra', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'hi', 'House No. 123, Dharavi, Mumbai', '{"allergies": ["penicillin"], "chronic_conditions": ["diabetes"]}', NOW(), NOW()),
+    ('22222222-2222-2222-2222-222222222222', 'Sunita Devi', 32, 'female', '+919876543211', 'Kurla', 'Mumbai', 'Maharashtra', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'hi', 'Plot No. 456, Kurla Village, Mumbai', '{"allergies": [], "chronic_conditions": ["hypertension"]}', NOW(), NOW()),
+    ('33333333-3333-3333-3333-333333333333', 'Arjun Singh', 28, 'male', '+919876543212', 'Andheri', 'Mumbai', 'Maharashtra', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'mr', 'Block B, Andheri East, Mumbai', '{"allergies": [], "chronic_conditions": []}', NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 
 -- Insert sample users with hashed passwords
