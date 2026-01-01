@@ -78,6 +78,12 @@ The PostgreSQL database is accessible at:
 - **Password**: password
 - **Connection String**: `postgresql://postgres:password@localhost:5432/arogya`
 
+**Note:** You can customize database credentials by setting environment variables in your `.env` file:
+- `POSTGRES_USER` (default: postgres)
+- `POSTGRES_PASSWORD` (default: password)
+- `POSTGRES_DB` (default: arogya)
+- `DATABASE_URL` (default: postgresql://postgres:password@localhost:5432/arogya)
+
 You can connect using any PostgreSQL client (e.g., pgAdmin, DBeaver, psql).
 
 ## Useful Docker Commands
