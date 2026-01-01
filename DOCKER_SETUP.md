@@ -23,15 +23,30 @@ cd Arogya-Swarm
 
 ### 2. Set Up Environment Variables
 
-Copy the example environment file and add your API keys:
+**IMPORTANT:** You must configure your `.env` file before starting Docker.
 
-```bash
-cp .env.example .env
-```
+1. **Copy the example:**
+   ```bash
+   cp .env.example .env
+   ```
 
-Edit `.env` and add your API keys:
-- `GOOGLE_API_KEY` - Required for AI features (Google Gemini)
-- `OPENWEATHERMAP_API_KEY` - Required for weather data
+2. **Required variables to change:**
+   - `POSTGRES_PASSWORD` - Your PostgreSQL password
+   - `DATABASE_URL` - Update with your password (use `@db:5432` for Docker)
+   - `GOOGLE_API_KEY` - Your Gemini API key
+   - `OPENWEATHERMAP_API_KEY` - Your weather API key
+
+3. **Example configuration:**
+   ```env
+   POSTGRES_PASSWORD=MySecurePassword123
+   DATABASE_URL=postgresql://postgres:MySecurePassword123@db:5432/arogya
+   GOOGLE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   OPENWEATHERMAP_API_KEY=abcdef1234567890abcdef1234567890
+   ```
+
+**Note:** For Docker environments, always use `@db:5432` in DATABASE_URL, not `@localhost:5432`.
+
+See [ENV_SETUP_GUIDE.md](ENV_SETUP_GUIDE.md) for detailed instructions.
 
 ### 3. Build and Start Services
 
