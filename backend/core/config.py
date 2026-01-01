@@ -2,6 +2,7 @@
 Core configuration for Arogya-Swarm backend
 """
 from pydantic_settings import BaseSettings
+from pydantic import Field
 from typing import List
 import os
 
@@ -27,11 +28,16 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
-    # CORS
-    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+    # CORS - Allow frontend origins (reads from CORS_ORIGINS env var)
+    CORS_ORIGINS: str = Field(
+        default="http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000",
+        env="CORS_ORIGINS",
+        description="Comma-separated list of allowed CORS origins"
+    )
     
     @property
     def cors_origins_list(self) -> List[str]:
+        """Parse CORS_ORIGINS string into list of origins"""
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
     
     # Google Gemini
