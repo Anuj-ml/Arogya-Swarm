@@ -19,7 +19,7 @@ google-generativeai==0.3.2
 langchain==0.1.4
 langgraph==0.0.20
 prophet==1.1.5
-tensorflow-lite==2.15.0
+# tensorflow-lite==2.15.0
 numpy==1.26.3
 pandas==2.2.0
 scikit-learn==1.4.0
