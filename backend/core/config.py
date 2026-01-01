@@ -1,7 +1,7 @@
 """
 Core configuration for Arogya-Swarm backend
 """
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 from typing import List
 import os
@@ -9,6 +9,12 @@ import os
 
 class Settings(BaseSettings):
     """Application settings"""
+    
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=True,
+        extra="ignore"  # Ignore extra environment variables from Docker Compose
+    )
     
     # Application
     APP_ENV: str = "development"
@@ -81,11 +87,6 @@ class Settings(BaseSettings):
     
     # Logging
     LOG_LEVEL: str = "INFO"
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
-        extra = "ignore"  # Ignore extra environment variables from Docker Compose
 
 
 # Global settings instance

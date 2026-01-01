@@ -59,7 +59,7 @@ def test_settings_accepts_valid_env_vars():
 
 
 def test_settings_config_has_extra_ignore():
-    """Test that the Config class has extra='ignore' setting"""
-    # Check that the Config class has the extra attribute set to 'ignore'
-    assert hasattr(Settings.model_config, 'get')
+    """Test that the model_config has extra='ignore' setting"""
+    # Check that the model_config has the extra attribute set to 'ignore'
+    assert hasattr(Settings, 'model_config')
     assert Settings.model_config.get('extra') == 'ignore'
